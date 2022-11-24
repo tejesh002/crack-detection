@@ -54,7 +54,9 @@ def predict_image_class():
     img = Image.open(io.BytesIO(img))
     print("IMAGES")
     prediction = predict(img, model)
-    class_name = "crack" if prediction[0] < 0.5 else "no_crack"
+    final_pred = prediction[0][0]*1000000
+    class_name = "crack" if final_pred < 0.5 else "no_crack"
+    print(class_name)
     response = {"prediction": class_name}
     return jsonify(response)
 
